@@ -21,21 +21,49 @@ The assembled genome is accessible under GenBank
 
 | Path | Contents |
 |---|---|
-| `fastQC/` | FastQC v0.12.1 quality reports for raw paired-end reads |
-| `spades_careful_output/` | SPAdes v4.2.0 `--careful` assembly (42 contigs; used for MRA announcement) |
+| `fastQC/fastQC_output/` | FastQC v0.12.1 quality reports for raw paired-end reads |
+| `fastQC/fastqc_trimmed_output/` | FastQC v0.12.1 quality reports for Trimmomatic-trimmed paired reads |
+| `spades_careful_output/` | SPAdes v4.2.0 `--careful` assembly (used for the MRA announcement) |
 | `spades_isolate_output/` | SPAdes v4.2.0 `--isolate` assembly (41 contigs) |
-| `spades--isolate-s-output/` | SPAdes v4.2.0 `--isolate -s` assembly — **definitive assembly used for all downstream analyses** (41 contigs; N50 = 404,174 bp) |
-| `assembly_validation/` | QUAST v5.3.0 structural metrics; BUSCO v6.0.0 completeness; CheckM2 v1.1.0 quality estimates; FastANI v1.34 and Mash v2.3 ANI tables |
-| `bakta_optimized_output/` | Bakta v1.12.0 structural annotation files (`.gff3`, `.gbff`, `.faa`, `.ffn`, `.fna`, `.tsv`) and circular genome map |
-| `functional_analysis/` | eggNOG-mapper v2.1.12 COG/KEGG assignments; CAZy subfamily Z-score tables; ProbioMinServer2 enrichment outputs; `figure2_functional_enrichment.py` — custom Python script generating Figure 2 of the manuscript |
-| `safety_analysis/` | RGI/CARD, ResFinder, AMRFinderPlus, VFDB (BLASTN), PHI-base (BLASTX), VirulenceFinder, PlasmidFinder, PlasmidHunter, Phigaro, ISEScan outputs |
+| `spades--isolate-s-ouput/` | SPAdes v4.2.0 `--isolate -s` assembly — **definitive assembly used for all downstream analyses** (41 contigs; N50 = 404,174 bp) |
+| `assembly_validation/quast_output/` | QUAST v5.3.0 structural metrics |
+| `assembly_validation/busco_optimized_output/` | BUSCO v6.0.0 completeness assessment (DB: *lactobacillaceae_odb12*) |
+| `assembly_validation/checkm2_optimized_output/` | CheckM2 v1.1.0 quality estimates |
+| `assembly_validation/ani/` | FastANI v1.34 average nucleotide identity tables for all three assemblies |
+| `references/` | Reference genomes used for the ANI comparison |
+| `bakta_optimized_output/` | Bakta v1.12.0 structural annotation files (`.gff3`, `.gbff`, `.faa`, `.ffn`, `.fna`, `.tsv`, `.embl`) and circular genome map (`.png`, `.svg`) |
+| `functional_analysis/` | eggNOG-mapper COG/KEGG assignments, CAZy subfamily Z-score tables, and ProbioMinServer2 enrichment outputs, in one subdirectory per assembly |
+| `safety_analysis/` | Consolidated AMR, virulence, plasmid, prophage and insertion-sequence screening results |
 | `remove-200bp.sh` | Bash script for filtering assembled contigs shorter than 200 bp prior to annotation |
+| `CITATION.cff` | Machine-readable citation metadata |
 | `LICENSE.md` | MIT License |
 
 > **Note on assembly selection:** All results in `assembly_validation/`,
 > `bakta_optimized_output/`, `functional_analysis/`, and `safety_analysis/`
 > are derived strictly from the SPAdes `--isolate -s` assembly unless
 > explicitly stated otherwise within a subdirectory README.
+
+### Subdirectory documentation
+
+Additional READMEs document individual directories: `references/`,
+`assembly_validation/ani/`, `spades--isolate-s-ouput/`, `spades_careful_output/`,
+`spades_isolate_output/`, `bakta_optimized_output/`, and
+`functional_analysis/--isolate-s_assembly/`.
+
+### Functional analysis layout
+
+`functional_analysis/` holds one subdirectory per assembly —
+`--careful_assembly/`, `--isolate_assembly/`, and `--isolate-s_assembly/` — each
+containing `COG/`, `CAZy/`, and `KEGG pathway/` outputs together with antiSMASH
+and gutSMASH archives. The `--isolate-s_assembly/` subdirectory additionally
+contains `eggNOG_ELMOCPCJ.tsv` and `FIGURE2.py`, the custom Python script
+generating Figure 2 of the manuscript.
+
+### Safety analysis contents
+
+`safety_analysis/` contains `ISEScan_ELMOCPCJ.tsv` (insertion sequence
+classification) and `Safety_ELMOCPCJ.xlsx`, which consolidates the results of the
+remaining screening tools listed below.
 
 ---
 
@@ -45,14 +73,13 @@ The assembled genome is accessible under GenBank
 
 | Tool | Version | Purpose |
 |---|---|---|
-| FastQC | v0.12.1 | Raw read quality assessment |
+| FastQC | v0.12.1 | Read quality assessment (raw and trimmed) |
 | Trimmomatic | v0.40 | Adapter removal and quality trimming |
 | SPAdes | v4.2.0 | *De novo* genome assembly |
 | QUAST | v5.3.0 | Assembly structural metrics |
 | BUSCO | v6.0.0 (DB: *lactobacillaceae\_odb12*) | Genome completeness assessment |
 | CheckM2 | v1.1.0 | Machine-learning genome quality estimation |
-| FastANI | v1.34 | Average Nucleotide Identity (primary) |
-| Mash | v2.3 (DB: NCBI type strains, Aug. 2023) | Average Nucleotide Identity (secondary) |
+| FastANI | v1.34 | Average Nucleotide Identity |
 
 ### Annotation and Functional Profiling
 
@@ -83,7 +110,7 @@ The assembled genome is accessible under GenBank
 
 | Tool | Version | Purpose |
 |---|---|---|
-| Matplotlib | v3.10.9 | Custom enrichment plots (Figure 2; see `functional_analysis/`) |
+| Matplotlib | v3.10.9 | Custom enrichment plots (Figure 2; see `functional_analysis/--isolate-s_assembly/FIGURE2.py`) |
 
 ---
 
@@ -102,16 +129,11 @@ minimum Phred score of 20.
 If you use data or scripts from this repository, please cite:
 
 > Vallente, J.E.R. (2026). *paracasei-SCA72564: Data and analysis files for
-> the de novo genome assembly and \
-> functional characterization of
-> Lacticaseibacillus paracasei SCA72564* \
-> (Version 1.0.0). Zenodo.
+> the de novo genome assembly and functional characterization of
+> Lacticaseibacillus paracasei SCA72564* (Version 1.0.0). Zenodo.
 > https://doi.org/10.5281/zenodo.20723035
 
-
-*(Replace the placeholder DOI with the Zenodo DOI once the repository release
-is archived. See [zenodo.org](https://zenodo.org) — link your GitHub account
-and create a release tagged `v1.0.0` to generate the DOI automatically.)*
+Citation metadata is also provided in [`CITATION.cff`](CITATION.cff).
 
 ---
 
