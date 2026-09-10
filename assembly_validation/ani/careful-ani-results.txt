@@ -1,0 +1,2 @@
+/home/ephraim/bakta_careful_output/L_paracasei_careful_mra.fna	JCM8130_Type.fna	98.084	858	1008
+/home/ephraim/bakta_careful_output/L_paracasei_careful_mra.fna	ATCC334_Ref.fna	98.0695	849	1008

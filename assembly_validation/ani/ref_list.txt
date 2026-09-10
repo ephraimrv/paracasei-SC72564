@@ -1,0 +1,4 @@
+/home/ephraim/RUNNING/references/l_paracasei/L_paracasei_ATCC334.fna
+/home/ephraim/RUNNING/references/l_paracasei/L_paracasei_DSM5622.fna
+/home/ephraim/RUNNING/references/l_paracasei/L_paracasei_NBRC15889.fna
+/home/ephraim/RUNNING/references/l_paracasei/L_rhamnosus_GG.fna

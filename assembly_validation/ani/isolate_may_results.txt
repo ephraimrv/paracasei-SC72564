@@ -1,0 +1,3 @@
+/home/ephraim/bakta_isolate_may/L_paracasei_isolate_mra.fna	ATCC_25302.fna	98.2489	798	1008
+/home/ephraim/bakta_isolate_may/L_paracasei_isolate_mra.fna	ATCC334_Ref.fna	98.0467	847	1008
+/home/ephraim/bakta_isolate_may/L_paracasei_isolate_mra.fna	JCM8130_Type.fna	98.0358	857	1008
