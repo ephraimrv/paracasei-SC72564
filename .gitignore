@@ -1,0 +1,11 @@
+# Trimmed reads — exceed GitHub's 100 MB per-file limit; regenerate from SRA
+# (see README "Excluded Data")
+/trimmomatic_output_optimized/
+
+# Guard against accidentally committing any large sequencing data
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sra
+*.bam
